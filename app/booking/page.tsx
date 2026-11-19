@@ -46,7 +46,7 @@ function AddCinema({ onSave }: { onSave: (id: string) => void }) {
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button size="sm">
           <Plus />
           Add cinema
         </Button>
@@ -54,17 +54,28 @@ function AddCinema({ onSave }: { onSave: (id: string) => void }) {
       <DialogContent className="editor">
         <DialogTitle>Add cinema</DialogTitle>
         <DialogDescription>
-          Enter the seat bundles available at this cinema.
+          Set the opening-night seat bundles for a cinema with a unique name.
         </DialogDescription>
         <form className="form-stack" onSubmit={save}>
           <label>
             Cinema name
             <Input name="name" required />
           </label>
-          <label>
-            Bundle sizes
-            <Input name="sizes" placeholder="e.g. 2, 5" required />
-          </label>
+          <div className="grid gap-2">
+            <label htmlFor="bundle-sizes">Bundle sizes</label>
+            <Input
+              id="bundle-sizes"
+              name="sizes"
+              placeholder="e.g. 2, 5"
+              aria-describedby="bundle-size-help"
+              required
+            />
+            <p id="bundle-size-help" className="text-sm text-muted-foreground">
+              Enter 1 to 10 different sizes separated by commas. Each size must
+              be a whole number from 1 to 500 seats. Groups can buy multiple
+              bundles of any size.
+            </p>
+          </div>
           {error && (
             <p role="alert" className="error">
               {error}
@@ -101,21 +112,24 @@ export default function BookingPage() {
       </div>
       <div className="section-heading">
         <h1>Booking</h1>
-        <AddCinema
-          onSave={(id) => {
-            setSelection(id);
-            cinemas.reload();
-          }}
-        />
       </div>
       <p className="intro">
         Find the fewest seat bundles for your whole group.
       </p>
       <div className="work-grid">
         <Card className="panel form-stack">
-          <label>
-            Cinema
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <label htmlFor="booking-cinema">Cinema</label>
+              <AddCinema
+                onSave={(id) => {
+                  setSelection(id);
+                  cinemas.reload();
+                }}
+              />
+            </div>
             <select
+              id="booking-cinema"
               disabled={!cinema}
               value={cinema?.id ?? ""}
               onChange={(event) => setSelection(event.target.value)}
@@ -126,7 +140,7 @@ export default function BookingPage() {
                 </option>
               ))}
             </select>
-          </label>
+          </div>
           <label>
             Group size
             <Input

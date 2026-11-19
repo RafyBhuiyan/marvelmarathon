@@ -23,7 +23,7 @@ docker compose up --build
 
 - **Movies** shows the library in release order. Search by title or filter by watch status. Use **Add movie** to add a film, the pencil to edit its details and prerequisites, and the checkbox to change its watch status.
 - **Rewatch plan** lists the prerequisites of the selected film in viewing order. Watched marks carry over from the library. A film with no prerequisites can be watched immediately.
-- **Booking** calculates an exact seat purchase for the selected cinema and group. Use **Add cinema** to enter another set of available bundle sizes. A quote describes what to buy. Seat reservations and payments are outside the app.
+- **Booking** calculates an exact seat purchase for the selected cinema and group. Use **Add cinema** next to the cinema picker to add a unique name and enter the available bundle sizes separated by commas. A quote describes what to buy. Seat reservations and payments are outside the app.
 
 ## How the code fits together
 
